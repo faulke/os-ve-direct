@@ -5,6 +5,7 @@ from vedirect import Vedirect
 async def check_queue(client):
     while True:
         if not queue.empty() and client.open:
+            print(len(queue))
             message = queue.get()
             await client.send(message)
         await asyncio.sleep(1)
