@@ -1,0 +1,8 @@
+{
+  "eslint.validate": ["javascript", "javascriptreact"],
+  "eslint.workingDirectories": ["./client"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.format.enable": true
+}
