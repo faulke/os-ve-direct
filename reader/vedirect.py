@@ -1,5 +1,5 @@
 from serial import Serial
-import json, multiprocessing, websockets
+import json, multiprocessing
 
 class Vedirect(multiprocessing.Process):
     def __init__(self, serialport, timeout, queue):

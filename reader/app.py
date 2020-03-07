@@ -14,7 +14,7 @@ async def websocket(client, path):
     await check_queue(client)
 
 # init data queue for vedirect service
-queue = multiprocessing.Queue()
+queue = multiprocessing.Queue(maxsize=1)
 
 # start ws server
 start_server = websockets.serve(websocket, "0.0.0.0", 8765)
