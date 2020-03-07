@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { w3cwebsocket as W3CWebSocket } from 'websocket'
 
-const client = new W3CWebSocket('ws://127.0.0.1:8765')
+const isDev = process.env.NODE_ENV === 'development'
+const host = isDev ? 'localhost' : window.location.hostname
+const client = new W3CWebSocket(`ws://${host}:8765`)
 
 const getCurrentState = id => {
   switch (id) {
@@ -36,6 +38,7 @@ class App extends Component {
     client.onopen = () => {
       console.log('Websocket client connected')
     }
+
     client.onmessage = message => {
       this.setState({ data: JSON.parse(message.data) })
     }
