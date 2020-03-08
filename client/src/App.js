@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { w3cwebsocket as W3CWebSocket } from 'websocket'
+import { Grid, Statistic } from 'semantic-ui-react'
 
 const isDev = process.env.NODE_ENV === 'development'
 const host = isDev ? 'localhost' : window.location.hostname
@@ -53,13 +54,40 @@ class App extends Component {
 
     return (
       <div>
-        <h1>Battery voltage: {data.V / 1000}V </h1>
-        <h1>Battery load: {data.I / 1000}A</h1>
-        <h1>Panel voltage: {data.VPV / 1000}V</h1>
-        <h1>Panel power: {data.PPV} W</h1>
-        <h1>Current state: {getCurrentState(data.CS)}</h1>
-        <h1>Yield today: {data.H20} kWh</h1>
-        <h1>Max power today: {data.H21} W</h1>
+        <Grid columns={4} padded stackable verticalAlign="middle">
+          <Grid.Column color="yellow" textAlign="center" tablet={4}>
+            <Statistic>
+              <Statistic.Label>Battery Voltage</Statistic.Label>
+              <Statistic.Value>{data.V / 1000}V</Statistic.Value>
+            </Statistic>
+          </Grid.Column>
+          <Grid.Column color="blue" textAlign="center" tablet={4}>
+            <Statistic>
+              <Statistic.Label>Battery Load</Statistic.Label>
+              <Statistic.Value>{data.I / 1000}A</Statistic.Value>
+            </Statistic>
+          </Grid.Column>
+          <Grid.Column color="orange" textAlign="center" tablet={4}>
+            <Statistic>
+              <Statistic.Label>Panel Voltage</Statistic.Label>
+              <Statistic.Value>{data.VPV / 1000}V</Statistic.Value>
+            </Statistic>
+          </Grid.Column>
+          <Grid.Column color="violet" textAlign="center" tablet={4}>
+            <Statistic>
+              <Statistic.Label>Panel Power</Statistic.Label>
+              <Statistic.Value>{data.PPV}W</Statistic.Value>
+            </Statistic>
+          </Grid.Column>
+          <Grid.Column color="grey" textAlign="center" tablet={16} stretched>
+            <Statistic>
+              <Statistic.Label>State</Statistic.Label>
+              <Statistic.Value>{getCurrentState(data.CS)}</Statistic.Value>
+            </Statistic>
+          </Grid.Column>
+        </Grid>
+        {/* <h1>Yield today: {data.H20} kWh</h1>
+        <h1>Max power today: {data.H21} W</h1> */}
       </div>
     )
   }
